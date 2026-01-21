@@ -1,5 +1,11 @@
 # elysia-rate-limit
 
+## 4.5.0
+
+### Minor Changes
+
+- be68d73: Allow for the max request/per interval to be dynamic
+
 ## 4.4.2
 
 ### Patch Changes
