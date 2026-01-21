@@ -6,6 +6,7 @@ import { DefaultContext } from './defaultContext'
 import { logger } from './logger'
 
 import type { Options } from '../@types/Options'
+import type { ExtendedRequest } from '../@types/Server'
 
 export const plugin = function rateLimitPlugin(userOptions?: Partial<Options>) {
   const options: Options = {
@@ -46,7 +47,7 @@ export const plugin = function rateLimitPlugin(userOptions?: Partial<Options>) {
         let clientKey: string | undefined
         const enhancedRequest = Object.defineProperty(request, 'cookie', {
           value: cookie,
-        }) as Request & { cookie: Record<string, Cookie<string>> }
+        }) as ExtendedRequest
 
         /**
          * if a skip option has two parameters,
@@ -180,7 +181,7 @@ export const plugin = function rateLimitPlugin(userOptions?: Partial<Options>) {
         if (!options.countFailedRequest) {
           const enhancedRequest = Object.defineProperty(request, 'cookie', {
             value: cookie,
-          }) as Request & { cookie: Record<string, Cookie<string>> }
+          }) as ExtendedRequest
           const clientKey = await options.generator(
             enhancedRequest,
             options.injectServer?.() ?? app.server,
